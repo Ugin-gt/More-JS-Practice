@@ -1,18 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script defer src="./index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>FD DOM Task</title>
+    <script defer src="./assets/js/index.js"></script>
+    <script defer src="./assets/js/data.js"></script>
+    <script defer src="./assets/js/solution.js"></script>
+
   </head>
   <body>
-    <form id="root-form">
-      <input type="text" name="email" />
-      <button type="submit">Submit Form</button>
-    </form>
-    <ul id="root-li">
-      <li class="inputArr">Result: </li>
-    </ul>
+    
+     <section>
+      <h1>CARDS</h1>
+      <ul id="root" class="cardsContainer">
+        <li class="cardWrapper">
+          <article class="cardContainer">
+            <div class="imageWrapper">
+              <div class="imagePlaceholder imagePlacement">ABR</div>
+              <img
+                class="cardImage imagePlacement"
+                src="https://www.totalhappyhour.com/preview/500-450/content/files/mod.happyhour/e646bf59c47247098a660704f84644a2.jpg"
+                alt="restraunt"
+              />
+            </div>
+            <h3 class="cardName">21st Amendment Brewery & Restaurant</h3>
+            <p class="cardDescription">fedsersd</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
   </body>
 </html>
