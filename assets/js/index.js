@@ -2,27 +2,27 @@
 
 const cardContainer = document.getElementById('root'); // ul
 
-const cards = data.map((place) => createPlaceCardElement(place)); // создаем li
+const cards = responseData.map((userData) => createUserCardElement(userData)); // создаем li
 
 cardContainer.append(...cards); // добавляем li в ul
 
 /**
  *
- * @param {object} place
+ * @param {object} userData
  * @returns {HTMLLIElement}
  */
-function createPlaceCardElement(place) {
-  const { description, name } = place;
+function createUserCardElement(userData) {
+  const { firstName, lastName, contacts } = userData;
 
   const p = createElement('p', { classNames: ['cardDescription'] }, [
-    document.createTextNode(description || ''),
+    document.createTextNode(contacts || ''),
   ]);
 
   const h2 = createElement('h2', { classNames: ['cardName'] }, [
-    document.createTextNode(name),
+    document.createTextNode(firstName, lastName),
   ]);
 
-  const img = createCardImage(place);
+  const img = createCardImage(userData);
 
   const article = createElement('article', { classNames: ['cardContainer'] }, [
     img,
@@ -37,28 +37,28 @@ function createPlaceCardElement(place) {
   return wrapper; //htmllielement
 }
 
-function createCardImage(place) {
-  const { name, id } = place;
+function createCardImage(userData) {
+  const { firstName, lastName, id } = userData;
 
   const imageWrapper = document.createElement('div');
   imageWrapper.setAttribute('id', `wrapper${id}`); // устанавливаем  id для контейнер картинки
   imageWrapper.classList.add('imageWrapper');
-  imageWrapper.style.backgroundColor = stringToColour(name);
+  imageWrapper.style.backgroundColor = stringToColour(firstName, lastName);
 
   const initials = document.createElement('div');
   initials.classList.add('imagePlaceholder', 'imagePlacement');
-  initials.append(document.createTextNode(name[0] || ''));
+  initials.append(document.createTextNode(firstName[0], lastName[0] || ''));
 
-  createImage(place);
+  createImage(userData);
 
   imageWrapper.append(initials);
   return imageWrapper;
 }
 
-function createImage({ profilePicture, name, id }) {
+function createImage({ profilePicture, firstName, lastName, id }) {
   const img = document.createElement('img'); // = new Image();
   img.setAttribute('src', profilePicture);
-  img.setAttribute('alt', name);
+  img.setAttribute('alt', firstName, lastName);
   img.dataset.id = id; // даём картинки её id
   img.classList.add('cardImage', 'imagePlacement');
   img.addEventListener('error', imageErrorHandler);

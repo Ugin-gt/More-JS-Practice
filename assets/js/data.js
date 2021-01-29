@@ -4,7 +4,7 @@ const responseData = [
     firstName: 'Jason',
     lastName: 'Statham',
     profilePicture:
-      'https://i.pinimg.com/orignals/24/f5/f8/24f5f8ef9f8af9c7e795ff0ba15f6881.jpg',
+    'http://de.web.img3.acsta.net/c_310_420/pictures/19/07/31/17/35/5396784.jpg',
     contacts: [
       'https://twitter.com/realjstatham',
       'https://www.facebook.com/JasonStatham/',
