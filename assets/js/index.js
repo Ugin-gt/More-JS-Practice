@@ -12,14 +12,14 @@ cardContainer.append(...cards); // добавляем li в ul
  * @returns {HTMLLIElement}
  */
 function createUserCardElement(userData) {
-  const { firstName, lastName, contacts } = userData;
+  const { firstName, lastName, description, contacts } = userData;
 
   const p = createElement('p', { classNames: ['cardDescription'] }, [
-    document.createTextNode(contacts || ''),
+    document.createTextNode(description || ''),
   ]);
 
   const h2 = createElement('h2', { classNames: ['cardName'] }, [
-    document.createTextNode(firstName, lastName),
+    document.createTextNode(`${firstName } ${ lastName }`),
   ]);
 
   const img = createCardImage(userData);
