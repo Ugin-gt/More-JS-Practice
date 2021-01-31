@@ -2,32 +2,38 @@
 
 const cardContainer = document.getElementById('root'); // ul
 
-const cards = responseData.map((userData) => createUserCardElement(userData)); // создаем li
+const cards = responseData.sort((prev, next) => prev.id - next.id).map((userData) => createUserCardElement(userData)); // создаем li
 
 cardContainer.append(...cards); // добавляем li в ul
 
 /**
- *
- * @param {object} userData
+  * @param {object} userData
  * @returns {HTMLLIElement}
  */
 function createUserCardElement(userData) {
   const { firstName, lastName, description, contacts } = userData;
 
+  const h2 = createElement('h2', { classNames: ['cardName'] }, [
+    document.createTextNode(`${firstName} ${lastName}`),
+  ]);
   const p = createElement('p', { classNames: ['cardDescription'] }, [
     document.createTextNode(description || ''),
   ]);
-
-  const h2 = createElement('h2', { classNames: ['cardName'] }, [
-    document.createTextNode(`${firstName } ${ lastName }`),
-  ]);
-
   const img = createCardImage(userData);
+
+  const div = createElement('div', { classNames: ['socialContacts'] },
+    contacts.map((link) => contactsUrl(link)).sort().map((url) => {
+      return createElement('a', { classNames: ['link'], attributes: { 'href': url.href } },
+        [createElement('img', { classNames: ['icon'], attributes: { 'src': getSocialIcon(url.hostname), 'alt': url.href } })]
+      )
+    })
+  );
 
   const article = createElement('article', { classNames: ['cardContainer'] }, [
     img,
     h2,
     p,
+    div
   ]);
 
   const wrapper = createElement('li', { classNames: ['cardWrapper'] }, [
@@ -43,7 +49,7 @@ function createCardImage(userData) {
   const imageWrapper = document.createElement('div');
   imageWrapper.setAttribute('id', `wrapper${id}`); // устанавливаем  id для контейнер картинки
   imageWrapper.classList.add('imageWrapper');
-  imageWrapper.style.backgroundColor = stringToColour(firstName, lastName);
+  imageWrapper.style.backgroundColor = stringToColour(`${firstName} ${lastName}`);
 
   const initials = document.createElement('div');
   initials.classList.add('imagePlaceholder', 'imagePlacement');
@@ -65,6 +71,24 @@ function createImage({ profilePicture, firstName, lastName, id }) {
   img.addEventListener('load', imageLoadHandler);
 }
 
+function contactsUrl(link) {
+  const url = new URL(link);
+  url.hostname.startsWith('www.')
+    ? url.hostname
+    : url.hostname = 'www.' + url.hostname;
+  return url;
+}
+
+function getSocialIcon(hostname) {
+  switch (hostname) {
+    case 'www.facebook.com':
+      return './assets/icons/facebook.svg';
+    case 'www.instagram.com':
+      return './assets/icons/instagram.svg';
+    case 'www.twitter.com':
+      return './assets/icons/twitter.svg';
+  }
+}
 /* 
   EVENT LISTENERS
 */
@@ -80,11 +104,9 @@ function imageLoadHandler({
 }) {
   document.getElementById(`wrapper${id}`).append(target);
 }
-
 /* 
   UTILS
 */
-
 // DONT TRUST THIS CODE. TAKEN FROM STACKOVERFLOW
 function stringToColour(str) {
   let hash = 0;
@@ -98,8 +120,6 @@ function stringToColour(str) {
   }
   return colour;
 }
-
-
 /* 
   LIB
 */
@@ -111,9 +131,14 @@ function stringToColour(str) {
  * @param {function} options.onClick
  * @param {HTMLElement[]} children
  */
-function createElement(type, { classNames, onClick }, children) {
+function createElement(type, { classNames, attributes, onClick }, children) {
   const elem = document.createElement(type);
   elem.classList.add(...classNames);
+  if (attributes) {
+    for (const [attrName, attrValue] of Object.entries(attributes)) {
+      elem.setAttribute(attrName, attrValue);
+    }
+  }
   elem.onclick = onClick;
   elem.append(...children);
   return elem;
