@@ -27,3 +27,19 @@ function createElement(type, { classNames, onClick }, children) {
   elem.append(...children);
   return elem;
 }
+
+
+function createCounter() {
+  let number = 1;
+  const id = setInterval(() => {
+    console.log(number++);
+    if (number >= 20)  {
+      clearInterval(id);
+      console.timeEnd('1');
+     }
+
+  }, 100);
+}
+console.time('1');
+createCounter ();
+
