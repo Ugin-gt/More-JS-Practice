@@ -21,19 +21,11 @@ function createUserCardElement(userData) {
   ]);
   const img = createCardImage(userData);
 
-  const div = createElement('div', { classNames: ['socialContacts'] },
-    contacts.map((link) => contactsUrl(link)).sort().map((url) => {
-      return createElement('a', { classNames: ['link'], attributes: { 'href': url.href } },
-        [createElement('img', { classNames: ['icon'], attributes: { 'src': getSocialIcon(url.hostname), 'alt': url.href } })]
-      )
-    })
-  );
 
   const article = createElement('article', { classNames: ['cardContainer'] }, [
     img,
     h2,
     p,
-    div
   ]);
 
   const wrapper = createElement('li', { classNames: ['cardWrapper'] }, [
@@ -71,24 +63,6 @@ function createImage({ profilePicture, firstName, lastName, id }) {
   img.addEventListener('load', imageLoadHandler);
 }
 
-function contactsUrl(link) {
-  const url = new URL(link);
-  url.hostname.startsWith('www.')
-    ? url.hostname
-    : url.hostname = 'www.' + url.hostname;
-  return url;
-}
-
-function getSocialIcon(hostname) {
-  switch (hostname) {
-    case 'www.facebook.com':
-      return './assets/icons/facebook.svg';
-    case 'www.instagram.com':
-      return './assets/icons/instagram.svg';
-    case 'www.twitter.com':
-      return './assets/icons/twitter.svg';
-  }
-}
 /* 
   EVENT LISTENERS
 */
