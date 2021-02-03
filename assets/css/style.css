@@ -71,32 +71,18 @@
   opacity: 0.6;
   font-style: italic;
 }
-.socialContacts a {
+
+.icon {
   margin-top: 30px;
+  margin-right: 10px;
   border: 1px solid #e8ecee;
   border-radius: 5px;
   display: inline-block;
-  font-size: 18px;
-  height: 50px;
-  line-height: 45px;
-  margin-right: 5px;
-  text-align: center;
-  width: 50px;
-}
-
-.socialContacts a:hover {
- 
-  background-color: #c9c2c2;
-  border-color: #c9c2c2;
-  color: #fff;
-  transition: background-color, color, 0.3s;
-}
- .icon {
-  width: 35px;
-  height: 35px;
+  height: 40px;
+  width: 40px;
 }
 .icon:hover {
-  filter: invert(1);
-  
-
+  background-color: #f81d1d;
+  border-color: #f81d1d;
+  transition: background-color, color, 0.3s;
 }

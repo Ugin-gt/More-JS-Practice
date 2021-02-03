@@ -20,12 +20,15 @@ function createUserCardElement(userData) {
     document.createTextNode(description || ''),
   ]);
   const img = createCardImage(userData);
-
+  
+  const a = createIcons(contacts);
 
   const article = createElement('article', { classNames: ['cardContainer'] }, [
     img,
     h2,
     p,
+    a
+    
   ]);
 
   const wrapper = createElement('li', { classNames: ['cardWrapper'] }, [

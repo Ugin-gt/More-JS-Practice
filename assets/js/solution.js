@@ -8,7 +8,7 @@ const supportedSocialNetworks = new Map()
   .set('www.instagram.com', './assets/icons/instagram.svg');
 
 
-const [icons] = responseData.map((user) => createIcons(user.contacts));
+const [icons] = responseData.map((userData) => createIcons(userData.contacts));
 document.body.append(...icons);
 
 
@@ -20,6 +20,7 @@ function createIcons(contacts) {
       const src = supportedSocialNetworks.get(hostname);
       const img = document.createElement('img');
       img.setAttribute('src', src);
+      img.classList.add('icon');
       const a = document.createElement('a');
       a.setAttribute('href', contact);
       a.append(img);
