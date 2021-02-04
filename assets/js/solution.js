@@ -7,11 +7,6 @@ const supportedSocialNetworks = new Map()
   .set('twitter.com', './assets/icons/twitter.svg')
   .set('www.instagram.com', './assets/icons/instagram.svg');
 
-
-const [icons] = responseData.map((userData) => createIcons(userData.contacts));
-document.body.append(...icons);
-
-
 function createIcons(contacts) {
   const arrayOfIconElements = contacts.map((contact) => {
     const { hostname } = new URL(contact);

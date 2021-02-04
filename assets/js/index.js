@@ -20,14 +20,16 @@ function createUserCardElement(userData) {
     document.createTextNode(description || ''),
   ]);
   const img = createCardImage(userData);
-  
-  const a = createIcons(contacts);
 
+  const arrayOfIconElements = createIcons(contacts);
+
+  const div = createElement('div', { classNames:[]},[...arrayOfIconElements]); 
+   
   const article = createElement('article', { classNames: ['cardContainer'] }, [
     img,
     h2,
     p,
-    a
+    div
     
   ]);
 
